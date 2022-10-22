@@ -1,0 +1,20 @@
+type User {
+  id: String!
+  name: String!
+  email: String!
+  password: String!
+  article: [Article!]!
+}
+
+type Article {
+  id: String!
+  title: String!
+  photoURL: String!
+  body: String!
+  category: String!
+  userID: String!
+}
+
+type Mutation {
+  Register(name: String!, email: String!, password: String!): User!
+}
