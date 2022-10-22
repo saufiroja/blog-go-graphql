@@ -48,3 +48,11 @@ func (r *userRepository) Login(email string) (dto.Login, error) {
 
 	return login, nil
 }
+
+func (r *userRepository) FindAllUsers() ([]entity.User, error) {
+	var users []entity.User
+
+	_ = r.DB.Find(&users).Error
+
+	return users, nil
+}

@@ -1,21 +1,19 @@
 package service
 
 import (
-	"graphql/blog-go-graphql/database"
 	"graphql/blog-go-graphql/dto"
+	"graphql/blog-go-graphql/entity"
 	"graphql/blog-go-graphql/interfaces"
 	"graphql/blog-go-graphql/utils"
 )
 
 type UserService struct {
 	userRepository interfaces.UserRepository
-	conf           database.Config
 }
 
-func NewUserService(userRepository interfaces.UserRepository, conf database.Config) interfaces.UserService {
+func NewUserService(userRepository interfaces.UserRepository) interfaces.UserService {
 	return &UserService{
 		userRepository: userRepository,
-		conf:           conf,
 	}
 }
 
@@ -38,4 +36,8 @@ func (s *UserService) Login(email, password string) error {
 	}
 
 	return nil
+}
+
+func (s *UserService) FindAllUsers() ([]entity.User, error) {
+	return s.userRepository.FindAllUsers()
 }

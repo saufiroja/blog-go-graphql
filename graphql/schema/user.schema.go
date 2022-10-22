@@ -52,11 +52,10 @@ func (s *UserSchema) Query() *graphql.Object {
 	object := graphql.ObjectConfig{
 		Name: "Query",
 		Fields: graphql.Fields{
-			"hello": &graphql.Field{
-				Type: graphql.String,
-				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return "Hello World", nil
-				},
+			"FindAllUsers": &graphql.Field{
+				Type:        graphql.NewList(User),
+				Description: "Get All Users",
+				Resolve:     s.UserResolvers.FindAllUsers,
 			},
 		},
 	}
