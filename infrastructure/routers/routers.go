@@ -27,7 +27,6 @@ func Routes(fiber *fiber.App, conf database.Config) *handler.Handler {
 	schema := schema.NewUserSchema(userResolvers)
 
 	// graphql
-
 	gh := handler.Config{
 		Schema:   schema.Root(),
 		Pretty:   true,
