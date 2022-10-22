@@ -1,0 +1,3 @@
+.env
+jwt.public.key
+jwt.private.key
