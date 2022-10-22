@@ -17,4 +17,5 @@ type Article {
 
 type Mutation {
   Register(name: String!, email: String!, password: String!): User!
+  Login(email: String!, password: String!): User!
 }

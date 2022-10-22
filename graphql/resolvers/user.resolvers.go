@@ -2,6 +2,7 @@ package resolvers
 
 import (
 	"graphql/blog-go-graphql/dto"
+	"graphql/blog-go-graphql/entity"
 	"graphql/blog-go-graphql/interfaces"
 
 	"github.com/graphql-go/graphql"
@@ -25,6 +26,20 @@ func (r *UserResolvers) Register(params graphql.ResolveParams) (interface{}, err
 	}
 
 	err := r.UserService.Register(user)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+
+func (r *UserResolvers) Login(params graphql.ResolveParams) (interface{}, error) {
+	user := &entity.User{
+		Email:    params.Args["email"].(string),
+		Password: params.Args["password"].(string),
+	}
+
+	err := r.UserService.Login(user.Email, user.Password)
 	if err != nil {
 		return nil, err
 	}

@@ -32,3 +32,19 @@ func (r *userRepository) Register(user *dto.Register) error {
 
 	return nil
 }
+
+func (r *userRepository) Login(email string) (dto.Login, error) {
+	login := dto.Login{
+		Email: email,
+	}
+	user := entity.User{
+		Email: login.Email,
+	}
+
+	result := r.DB.Model(&user).Where("email = ?", login.Email).First(&user)
+	if result.Error != nil {
+		return login, result.Error
+	}
+
+	return login, nil
+}
