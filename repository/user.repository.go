@@ -33,20 +33,15 @@ func (r *userRepository) Register(user *dto.Register) error {
 	return nil
 }
 
-func (r *userRepository) Login(email string) (dto.Login, error) {
-	login := dto.Login{
-		Email: email,
-	}
-	user := entity.User{
-		Email: login.Email,
-	}
+func (r *userRepository) Login(email string) (entity.User, error) {
+	user := entity.User{}
 
-	result := r.DB.Model(&user).Where("email = ?", login.Email).First(&user)
+	result := r.DB.Where("email = ?", email).First(&user)
 	if result.Error != nil {
-		return login, result.Error
+		return user, result.Error
 	}
 
-	return login, nil
+	return user, nil
 }
 
 func (r *userRepository) FindAllUsers() ([]entity.User, error) {

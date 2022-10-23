@@ -6,7 +6,6 @@ import (
 )
 
 type User struct {
-	gorm.Model
 	ID        string    `json:"id" gorm:"primaryKey"`
 	Name      string    `json:"name" gorm:"not null"`
 	Email     string    `json:"email" gorm:"unique" validate:"required,email,unique"`

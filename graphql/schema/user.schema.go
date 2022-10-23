@@ -68,7 +68,7 @@ func (s *UserSchema) Mutation() *graphql.Object {
 	object := graphql.ObjectConfig{
 		Name: "Mutation",
 		Fields: graphql.Fields{
-			"register": &graphql.Field{
+			"Register": &graphql.Field{
 				Type:        User,
 				Description: "Register User",
 				Args: graphql.FieldConfigArgument{
@@ -84,7 +84,7 @@ func (s *UserSchema) Mutation() *graphql.Object {
 				},
 				Resolve: s.UserResolvers.Register,
 			},
-			"login": &graphql.Field{
+			"Login": &graphql.Field{
 				Type:        User,
 				Description: "Login User",
 				Args: graphql.FieldConfigArgument{

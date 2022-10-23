@@ -9,7 +9,7 @@ import (
 
 type UserRepository interface {
 	Register(user *dto.Register) error
-	Login(email string) (dto.Login, error)
+	Login(email string) (entity.User, error)
 	FindAllUsers() ([]entity.User, error)
 }
 

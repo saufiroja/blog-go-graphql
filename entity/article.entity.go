@@ -6,7 +6,6 @@ import (
 )
 
 type Article struct {
-	gorm.Model
 	ID        string `json:"id" gorm:"primaryKey"`
 	PhotoURL  string `json:"photo_url" gorm:"not null"`
 	Title     string `json:"title" gorm:"not null"`
