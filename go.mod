@@ -8,6 +8,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.11.1 // indirect
 	github.com/gofiber/fiber/v2 v2.38.1 // indirect
+	github.com/golang-jwt/jwt/v4 v4.4.2 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/graphql-go/graphql v0.8.0 // indirect
 	github.com/graphql-go/handler v0.2.3 // indirect

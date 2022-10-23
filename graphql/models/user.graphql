@@ -15,11 +15,15 @@ type Article {
   userID: String!
 }
 
+type Token {
+  token: String!
+}
+
 type Query {
   FindAllUsers(): [User!]!
-  FindUserByID(id: String!): User!
 }
 
 type Mutation {
   Register(name: String!, email: String!, password: String!): User!
+  Login(email: String!, password: String!): Token!
 }

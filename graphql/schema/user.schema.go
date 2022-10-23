@@ -18,6 +18,16 @@ func NewUserSchema(userResolvers interfaces.UserResolvers) interfaces.UserSchema
 
 // variable for user schema
 var (
+	Token = graphql.NewObject(graphql.ObjectConfig{
+		Name:        "Token",
+		Description: "Token for user",
+		Fields: graphql.Fields{
+			"token": &graphql.Field{
+				Type: graphql.String,
+			},
+		},
+	})
+
 	User = graphql.NewObject(graphql.ObjectConfig{
 		Name:        "User",
 		Description: "User Schema",
@@ -57,16 +67,6 @@ func (s *UserSchema) Query() *graphql.Object {
 				Description: "Get All Users",
 				Resolve:     s.UserResolvers.FindAllUsers,
 			},
-			"FindUserByID": &graphql.Field{
-				Type:        User,
-				Description: "Get User By ID",
-				Args: graphql.FieldConfigArgument{
-					"id": &graphql.ArgumentConfig{
-						Type: graphql.NewNonNull(graphql.String),
-					},
-				},
-				Resolve: s.UserResolvers.FindUserByID,
-			},
 		},
 	}
 
@@ -93,6 +93,19 @@ func (s *UserSchema) Mutation() *graphql.Object {
 					},
 				},
 				Resolve: s.UserResolvers.Register,
+			},
+			"Login": &graphql.Field{
+				Type:        Token,
+				Description: "Login User",
+				Args: graphql.FieldConfigArgument{
+					"email": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+					"password": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+				},
+				Resolve: s.UserResolvers.Login,
 			},
 		},
 	}

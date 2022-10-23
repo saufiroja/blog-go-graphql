@@ -1,6 +1,7 @@
 package resolvers
 
 import (
+	"fmt"
 	"graphql/blog-go-graphql/dto"
 	"graphql/blog-go-graphql/interfaces"
 
@@ -32,6 +33,18 @@ func (r *UserResolvers) Register(params graphql.ResolveParams) (interface{}, err
 	return user, nil
 }
 
+func (r *UserResolvers) Login(params graphql.ResolveParams) (interface{}, error) {
+	email := params.Args["email"].(string)
+	password := params.Args["password"].(string)
+	user, err := r.UserService.Login(email, password)
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Println("token", user)
+	return user, nil
+}
+
 func (r *UserResolvers) FindAllUsers(params graphql.ResolveParams) (interface{}, error) {
 	users, err := r.UserService.FindAllUsers()
 	if err != nil {
@@ -39,13 +52,4 @@ func (r *UserResolvers) FindAllUsers(params graphql.ResolveParams) (interface{},
 	}
 
 	return users, nil
-}
-
-func (r *UserResolvers) FindUserByID(params graphql.ResolveParams) (interface{}, error) {
-	user, err := r.UserService.FindUserByID(params.Args["id"].(string))
-	if err != nil {
-		return nil, err
-	}
-
-	return user, nil
 }
