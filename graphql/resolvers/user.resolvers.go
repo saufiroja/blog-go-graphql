@@ -1,7 +1,6 @@
 package resolvers
 
 import (
-	"fmt"
 	"graphql/blog-go-graphql/dto"
 	"graphql/blog-go-graphql/interfaces"
 
@@ -41,8 +40,11 @@ func (r *UserResolvers) Login(params graphql.ResolveParams) (interface{}, error)
 		return nil, err
 	}
 
-	fmt.Println("token", user)
-	return user, nil
+	data := map[string]interface{}{
+		"token": user,
+	}
+
+	return data, nil
 }
 
 func (r *UserResolvers) FindAllUsers(params graphql.ResolveParams) (interface{}, error) {
