@@ -24,20 +24,6 @@ func (s *UserService) Register(user *dto.Register) error {
 	return s.userRepository.Register(user)
 }
 
-func (s *UserService) Login(email, password string) error {
-	user, err := s.userRepository.Login(email)
-	if err != nil {
-		return err
-	}
-
-	err = utils.ComparePassword(user.Password, password)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (s *UserService) FindAllUsers() ([]entity.User, error) {
 	return s.userRepository.FindAllUsers()
 }

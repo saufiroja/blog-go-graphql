@@ -94,18 +94,6 @@ func (s *UserSchema) Mutation() *graphql.Object {
 				},
 				Resolve: s.UserResolvers.Register,
 			},
-			"Login": &graphql.Field{
-				Type:        User,
-				Description: "Login User",
-				Args: graphql.FieldConfigArgument{
-					"email": &graphql.ArgumentConfig{
-						Type: graphql.NewNonNull(graphql.String),
-					},
-					"password": &graphql.ArgumentConfig{
-						Type: graphql.NewNonNull(graphql.String),
-					},
-				},
-			},
 		},
 	}
 
