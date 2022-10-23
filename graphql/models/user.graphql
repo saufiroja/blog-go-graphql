@@ -6,17 +6,26 @@ type User {
   article: [Article!]!
 }
 
-type Article {
-  id: String!
-  title: String!
-  photoURL: String!
-  body: String!
-  category: String!
-  userID: String!
+type Token {
+  accessToken: String!
 }
 
-type Token {
-  token: String!
+type LoginResponse {
+  code: Int!
+  message: String!
+  result: Token!
+}
+
+type RegisterResponse {
+  code: Int!
+  message: String!
+  result: User!
+}
+
+type GetUsersResponse {
+  code: Int!
+  message: String!
+  result: [User!]!
 }
 
 type Query {
@@ -24,6 +33,6 @@ type Query {
 }
 
 type Mutation {
-  Register(name: String!, email: String!, password: String!): User!
-  Login(email: String!, password: String!): Token!
+  Register(name: String!, email: String!, password: String!): RegisterResponse!
+  Login(email: String!, password: String!): LoginResponse!
 }

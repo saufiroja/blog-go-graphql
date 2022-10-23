@@ -22,13 +22,18 @@ func (s *UserService) Register(user *dto.Register) error {
 	hash, _ := utils.HashPassword(user.Password)
 	user.Password = hash
 
-	return s.userRepository.Register(user)
+	err := s.userRepository.Register(user)
+	if err != nil {
+		return errors.New("email already exists")
+	}
+
+	return nil
 }
 
 func (s *UserService) Login(email, password string) (string, error) {
 	user, err := s.userRepository.Login(email)
 	if err != nil {
-		return "", err
+		return "", errors.New("email is not registered")
 	}
 
 	err = utils.ComparePassword(user.Password, password)

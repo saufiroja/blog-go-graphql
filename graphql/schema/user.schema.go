@@ -19,18 +19,71 @@ func NewUserSchema(userResolvers interfaces.UserResolvers) interfaces.UserSchema
 // variable for user schema
 var (
 	Token = graphql.NewObject(graphql.ObjectConfig{
-		Name:        "Token",
-		Description: "Token for user",
+		Name:        "TokenResult",
+		Description: "Token Result",
 		Fields: graphql.Fields{
-			"token": &graphql.Field{
+			"code": &graphql.Field{
+				Type: graphql.Int,
+			},
+			"message": &graphql.Field{
 				Type: graphql.String,
+			},
+			"result": &graphql.Field{
+				Type: graphql.NewObject(graphql.ObjectConfig{
+					Name: "Token",
+					Fields: graphql.Fields{
+						"accessToken": &graphql.Field{
+							Type: graphql.String,
+						},
+					},
+				}),
 			},
 		},
 	})
 
 	User = graphql.NewObject(graphql.ObjectConfig{
-		Name:        "User",
-		Description: "User Schema",
+		Name:        "Response",
+		Description: "User Response",
+		Fields: graphql.Fields{
+			"code": &graphql.Field{
+				Type: graphql.Int,
+			},
+			"message": &graphql.Field{
+				Type: graphql.String,
+			},
+			"result": &graphql.Field{
+				Type: graphql.NewObject(graphql.ObjectConfig{
+					Name: "User",
+					Fields: graphql.Fields{
+						"id": &graphql.Field{
+							Type: graphql.String,
+						},
+						"name": &graphql.Field{
+							Type: graphql.String,
+						},
+						"email": &graphql.Field{
+							Type: graphql.String,
+						},
+						"password": &graphql.Field{
+							Type: graphql.String,
+						},
+						"created_at": &graphql.Field{
+							Type: graphql.Int,
+						},
+						"updated_at": &graphql.Field{
+							Type: graphql.Int,
+						},
+						"deleted_at": &graphql.Field{
+							Type: graphql.Int,
+						},
+					},
+				}),
+			},
+		},
+	})
+
+	AllUser = graphql.NewObject(graphql.ObjectConfig{
+		Name: "AllUser",
 		Fields: graphql.Fields{
 			"id": &graphql.Field{
 				Type: graphql.String,
@@ -63,8 +116,8 @@ func (s *UserSchema) Query() *graphql.Object {
 		Name: "Query",
 		Fields: graphql.Fields{
 			"FindAllUsers": &graphql.Field{
-				Type:        graphql.NewList(User),
-				Description: "Get All Users",
+				Type:        graphql.NewList(AllUser),
+				Description: "Find All User",
 				Resolve:     s.UserResolvers.FindAllUsers,
 			},
 		},

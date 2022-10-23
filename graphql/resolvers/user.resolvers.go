@@ -3,6 +3,7 @@ package resolvers
 import (
 	"graphql/blog-go-graphql/dto"
 	"graphql/blog-go-graphql/interfaces"
+	"graphql/blog-go-graphql/utils"
 
 	"github.com/graphql-go/graphql"
 )
@@ -29,19 +30,29 @@ func (r *UserResolvers) Register(params graphql.ResolveParams) (interface{}, err
 		return nil, err
 	}
 
-	return user, nil
+	data := utils.ResponseSuccess{
+		Code:    201,
+		Message: "Register Success",
+		Result:  user,
+	}
+
+	return data, nil
 }
 
 func (r *UserResolvers) Login(params graphql.ResolveParams) (interface{}, error) {
 	email := params.Args["email"].(string)
 	password := params.Args["password"].(string)
-	user, err := r.UserService.Login(email, password)
+	token, err := r.UserService.Login(email, password)
 	if err != nil {
 		return nil, err
 	}
 
-	data := map[string]interface{}{
-		"token": user,
+	data := utils.ResponseSuccess{
+		Code:    200,
+		Message: "Login Success",
+		Result: map[string]interface{}{
+			"accessToken": token,
+		},
 	}
 
 	return data, nil
