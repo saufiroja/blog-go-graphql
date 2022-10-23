@@ -11,18 +11,21 @@ type UserRepository interface {
 	Register(user *dto.Register) error
 	Login(email string) (entity.User, error)
 	FindAllUsers() ([]entity.User, error)
+	FindUserByID(id string) (entity.User, error)
 }
 
 type UserService interface {
 	Register(user *dto.Register) error
 	Login(email, password string) error
 	FindAllUsers() ([]entity.User, error)
+	FindUserByID(id string) (entity.User, error)
 }
 
 type UserResolvers interface {
 	Register(params graphql.ResolveParams) (interface{}, error)
 	Login(params graphql.ResolveParams) (interface{}, error)
 	FindAllUsers(params graphql.ResolveParams) (interface{}, error)
+	FindUserByID(params graphql.ResolveParams) (interface{}, error)
 }
 
 type UserSchema interface {

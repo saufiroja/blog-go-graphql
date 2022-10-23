@@ -55,3 +55,12 @@ func (r *UserResolvers) FindAllUsers(params graphql.ResolveParams) (interface{},
 
 	return users, nil
 }
+
+func (r *UserResolvers) FindUserByID(params graphql.ResolveParams) (interface{}, error) {
+	user, err := r.UserService.FindUserByID(params.Args["id"].(string))
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}

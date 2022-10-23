@@ -17,6 +17,7 @@ type Article {
 
 type Query {
   FindAllUsers(): [User!]!
+  FindUserByID(id: String!): User!
 }
 
 type Mutation {

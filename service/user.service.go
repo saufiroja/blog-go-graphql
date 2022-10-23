@@ -41,3 +41,7 @@ func (s *UserService) Login(email, password string) error {
 func (s *UserService) FindAllUsers() ([]entity.User, error) {
 	return s.userRepository.FindAllUsers()
 }
+
+func (s *UserService) FindUserByID(id string) (entity.User, error) {
+	return s.userRepository.FindUserByID(id)
+}
