@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"graphql/blog-go-graphql/dto"
 	"graphql/blog-go-graphql/entity"
 	"graphql/blog-go-graphql/interfaces"
@@ -61,4 +62,15 @@ func (r *userRepository) FindUserById(id string) (entity.User, error) {
 	}
 
 	return user, nil
+}
+
+func (r *userRepository) UpdateUser(id string, user *entity.User) error {
+	users := entity.User{}
+	fmt.Println(user.Name, id)
+	res := r.DB.Model(&users).Where("id = ?", id).Updates(user)
+	if res.Error != nil {
+		return res.Error
+	}
+
+	return nil
 }

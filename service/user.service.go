@@ -53,3 +53,7 @@ func (s *UserService) FindAllUsers() ([]entity.User, error) {
 func (s *UserService) FindUserById(id string) (entity.User, error) {
 	return s.userRepository.FindUserById(id)
 }
+
+func (s *UserService) UpdateUser(id string, user *entity.User) error {
+	return s.userRepository.UpdateUser(id, user)
+}

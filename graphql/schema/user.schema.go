@@ -170,6 +170,19 @@ func (s *UserSchema) Mutation() *graphql.Object {
 				},
 				Resolve: s.UserResolvers.Login,
 			},
+			"UpdateUser": &graphql.Field{
+				Type:        AllUser,
+				Description: "Update User",
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+					"name": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+				},
+				Resolve: s.UserResolvers.UpdateUser,
+			},
 		},
 	}
 
