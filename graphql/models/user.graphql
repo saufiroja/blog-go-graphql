@@ -30,6 +30,7 @@ type GetUsersResponse {
 
 type Query {
   FindAllUsers(): [User!]!
+  FindUserById(id: String!): User!
 }
 
 type Mutation {

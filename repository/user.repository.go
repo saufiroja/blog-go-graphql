@@ -51,3 +51,14 @@ func (r *userRepository) FindAllUsers() ([]entity.User, error) {
 
 	return users, nil
 }
+
+func (r *userRepository) FindUserById(id string) (entity.User, error) {
+	user := entity.User{}
+
+	result := r.DB.Where("id = ?", id).First(&user)
+	if result.Error != nil {
+		return user, result.Error
+	}
+
+	return user, nil
+}

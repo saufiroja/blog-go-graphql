@@ -120,6 +120,16 @@ func (s *UserSchema) Query() *graphql.Object {
 				Description: "Find All User",
 				Resolve:     s.UserResolvers.FindAllUsers,
 			},
+			"FindUserById": &graphql.Field{
+				Type:        AllUser,
+				Description: "Find User By Id",
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+				},
+				Resolve: s.UserResolvers.FindUserById,
+			},
 		},
 	}
 
