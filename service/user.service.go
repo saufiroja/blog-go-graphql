@@ -57,3 +57,7 @@ func (s *UserService) FindUserById(id string) (entity.User, error) {
 func (s *UserService) UpdateUser(id string, user *entity.User) error {
 	return s.userRepository.UpdateUser(id, user)
 }
+
+func (s *UserService) DeleteUser(id string) error {
+	return s.userRepository.DeleteUser(id)
+}

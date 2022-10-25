@@ -13,6 +13,7 @@ type UserRepository interface {
 	FindAllUsers() ([]entity.User, error)
 	FindUserById(id string) (entity.User, error)
 	UpdateUser(id string, user *entity.User) error
+	DeleteUser(id string) error
 }
 
 type UserService interface {
@@ -21,6 +22,7 @@ type UserService interface {
 	FindAllUsers() ([]entity.User, error)
 	FindUserById(id string) (entity.User, error)
 	UpdateUser(id string, user *entity.User) error
+	DeleteUser(id string) error
 }
 
 type UserResolvers interface {
@@ -29,6 +31,7 @@ type UserResolvers interface {
 	FindAllUsers(params graphql.ResolveParams) (interface{}, error)
 	FindUserById(params graphql.ResolveParams) (interface{}, error)
 	UpdateUser(params graphql.ResolveParams) (interface{}, error)
+	DeleteUser(params graphql.ResolveParams) (interface{}, error)
 }
 
 type UserSchema interface {

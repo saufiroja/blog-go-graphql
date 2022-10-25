@@ -97,3 +97,19 @@ func (r *UserResolvers) UpdateUser(params graphql.ResolveParams) (interface{}, e
 
 	return user, nil
 }
+
+func (r *UserResolvers) DeleteUser(params graphql.ResolveParams) (interface{}, error) {
+	id := params.Args["id"].(string)
+	err := r.UserService.DeleteUser(id)
+	if err != nil {
+		return nil, err
+	}
+
+	data := utils.ResponseSuccess{
+		Code:    200,
+		Message: "Delete User Success",
+		Result:  true,
+	}
+
+	return data, nil
+}

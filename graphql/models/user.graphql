@@ -37,4 +37,5 @@ type Mutation {
   Register(name: String!, email: String!, password: String!): RegisterResponse!
   Login(email: String!, password: String!): LoginResponse!
   UpdateUser(id: String!, name: String!): User!
+  DeleteUser(id: String!): User!
 }

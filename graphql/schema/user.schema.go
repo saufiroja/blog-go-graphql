@@ -183,6 +183,16 @@ func (s *UserSchema) Mutation() *graphql.Object {
 				},
 				Resolve: s.UserResolvers.UpdateUser,
 			},
+			"DeleteUser": &graphql.Field{
+				Type:        graphql.Boolean,
+				Description: "Delete User",
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+				},
+				Resolve: s.UserResolvers.DeleteUser,
+			},
 		},
 	}
 
