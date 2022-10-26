@@ -30,8 +30,14 @@ func InitDatabase(conf Config) *gorm.DB {
 	dbName := os.Getenv("DB_NAME")
 	dbHost := os.Getenv("DB_HOST")
 	dbPort := os.Getenv("DB_PORT")
+	env := os.Getenv("GO_ENV")
 
-	dbURI := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Jakarta", dbHost, dbUser, dbPass, dbName, dbPort)
+	var dbURI string
+	if env == "development" {
+		dbURI = fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Jakarta", dbHost, dbUser, dbPass, dbName, dbPort)
+	} else {
+		dbURI = fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=enable TimeZone=Asia/Jakarta", dbHost, dbUser, dbPass, dbName, dbPort)
+	}
 
 	db, err := gorm.Open(postgres.Open(dbURI), &gorm.Config{})
 	db.AutoMigrate(&entity.User{}, &entity.Article{})
