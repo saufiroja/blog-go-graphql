@@ -4,7 +4,6 @@ import (
 	"graphql/blog-go-graphql/dto"
 	"graphql/blog-go-graphql/entity"
 	"graphql/blog-go-graphql/interfaces"
-	"graphql/blog-go-graphql/utils"
 
 	"github.com/graphql-go/graphql"
 )
@@ -31,13 +30,7 @@ func (r *UserResolvers) Register(params graphql.ResolveParams) (interface{}, err
 		return nil, err
 	}
 
-	data := utils.ResponseSuccess{
-		Code:    201,
-		Message: "Register Success",
-		Result:  user,
-	}
-
-	return data, nil
+	return user, nil
 }
 
 func (r *UserResolvers) Login(params graphql.ResolveParams) (interface{}, error) {
@@ -48,15 +41,7 @@ func (r *UserResolvers) Login(params graphql.ResolveParams) (interface{}, error)
 		return nil, err
 	}
 
-	data := utils.ResponseSuccess{
-		Code:    200,
-		Message: "Login Success",
-		Result: map[string]interface{}{
-			"accessToken": token,
-		},
-	}
-
-	return data, nil
+	return token, nil
 }
 
 func (r *UserResolvers) FindAllUsers(params graphql.ResolveParams) (interface{}, error) {
@@ -89,12 +74,6 @@ func (r *UserResolvers) UpdateUser(params graphql.ResolveParams) (interface{}, e
 		return nil, err
 	}
 
-	// data := utils.ResponseSuccess{
-	// 	Code:    200,
-	// 	Message: "Update User Success",
-	// 	Result:  user,
-	// }
-
 	return user, nil
 }
 
@@ -105,11 +84,5 @@ func (r *UserResolvers) DeleteUser(params graphql.ResolveParams) (interface{}, e
 		return nil, err
 	}
 
-	data := utils.ResponseSuccess{
-		Code:    200,
-		Message: "Delete User Success",
-		Result:  true,
-	}
-
-	return data, nil
+	return nil, nil
 }

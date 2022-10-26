@@ -19,71 +19,17 @@ func NewUserSchema(userResolvers interfaces.UserResolvers) interfaces.UserSchema
 // variable for user schema
 var (
 	Token = graphql.NewObject(graphql.ObjectConfig{
-		Name:        "TokenResult",
-		Description: "Token Result",
+		Name: "Token",
 		Fields: graphql.Fields{
-			"code": &graphql.Field{
-				Type: graphql.Int,
-			},
-			"message": &graphql.Field{
+			"accessToken": &graphql.Field{
 				Type: graphql.String,
-			},
-			"result": &graphql.Field{
-				Type: graphql.NewObject(graphql.ObjectConfig{
-					Name: "Token",
-					Fields: graphql.Fields{
-						"accessToken": &graphql.Field{
-							Type: graphql.String,
-						},
-					},
-				}),
 			},
 		},
 	})
 
 	User = graphql.NewObject(graphql.ObjectConfig{
-		Name:        "Response",
-		Description: "User Response",
-		Fields: graphql.Fields{
-			"code": &graphql.Field{
-				Type: graphql.Int,
-			},
-			"message": &graphql.Field{
-				Type: graphql.String,
-			},
-			"result": &graphql.Field{
-				Type: graphql.NewObject(graphql.ObjectConfig{
-					Name: "User",
-					Fields: graphql.Fields{
-						"id": &graphql.Field{
-							Type: graphql.String,
-						},
-						"name": &graphql.Field{
-							Type: graphql.String,
-						},
-						"email": &graphql.Field{
-							Type: graphql.String,
-						},
-						"password": &graphql.Field{
-							Type: graphql.String,
-						},
-						"created_at": &graphql.Field{
-							Type: graphql.Int,
-						},
-						"updated_at": &graphql.Field{
-							Type: graphql.Int,
-						},
-						"deleted_at": &graphql.Field{
-							Type: graphql.Int,
-						},
-					},
-				}),
-			},
-		},
-	})
-
-	AllUser = graphql.NewObject(graphql.ObjectConfig{
-		Name: "AllUser",
+		Name:        "User",
+		Description: "User",
 		Fields: graphql.Fields{
 			"id": &graphql.Field{
 				Type: graphql.String,
@@ -116,12 +62,12 @@ func (s *UserSchema) Query() *graphql.Object {
 		Name: "Query",
 		Fields: graphql.Fields{
 			"FindAllUsers": &graphql.Field{
-				Type:        graphql.NewList(AllUser),
+				Type:        graphql.NewList(User),
 				Description: "Find All User",
 				Resolve:     s.UserResolvers.FindAllUsers,
 			},
 			"FindUserById": &graphql.Field{
-				Type:        AllUser,
+				Type:        User,
 				Description: "Find User By Id",
 				Args: graphql.FieldConfigArgument{
 					"id": &graphql.ArgumentConfig{
@@ -171,7 +117,7 @@ func (s *UserSchema) Mutation() *graphql.Object {
 				Resolve: s.UserResolvers.Login,
 			},
 			"UpdateUser": &graphql.Field{
-				Type:        AllUser,
+				Type:        User,
 				Description: "Update User",
 				Args: graphql.FieldConfigArgument{
 					"id": &graphql.ArgumentConfig{
