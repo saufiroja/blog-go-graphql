@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"os"
 	"time"
 
@@ -10,7 +9,6 @@ import (
 
 func GenerateAccessToken(id, email string) (string, error) {
 	secret := os.Getenv("JWT_PRIVATE_KEY")
-	fmt.Println(secret)
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"id":    id,
 		"email": email,
