@@ -35,7 +35,7 @@ services:
       - POSTGRES_DB=${DB_NAME}
       - DATABASE_HOST=${DB_HOST}
     ports:
-      - 5433:5432
+      - ${DB_PORTS}:${DB_PORT}
     volumes:
       - database:/var/lib/postgresql/data
     networks:
