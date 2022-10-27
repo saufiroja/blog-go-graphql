@@ -14,6 +14,7 @@ import (
 func InitServer() *fiber.App {
 	app := fiber.New()
 	conf := database.Config{}
+	database.InitDatabase(&conf)
 
 	app.Use(recover.New())
 	app.Use(logger.New(logger.Config{

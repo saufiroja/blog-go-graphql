@@ -1,7 +1,49 @@
 version: '3'
 services:
-  blog-backend:
+  app:
+    container_name: blog-app
     build: .
+    restart: on-failure
+    env_file:
+      - .env
+    environment:
+      - GO_ENV=${GO_ENV}
+      - PORT=${PORT}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
+      - DATABASE_HOST=${DB_HOST}
+      - DATABASE_PORT=${DB_PORT}
+      - JWT_PUBLIC_KEY=${JWT_PUBLIC_KEY}
+      - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
     ports:
-      - '8000:8080'
-    restart: always
+      - 8080:8080
+    volumes:
+      - api:/app
+    depends_on:
+      - postgres-db
+    networks:
+      - app_backend
+  postgres-db:
+    image: postgres:latest
+    container_name: db_postgres
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
+      - DATABASE_HOST=${DB_HOST}
+    ports:
+      - 5432:5432
+    volumes:
+      - database:/var/lib/postgresql/data
+    networks:
+      - app_backend
+
+volumes:
+  api:
+  database:
+networks:
+  app_backend:
+    driver: bridge

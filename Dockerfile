@@ -1,4 +1,4 @@
-FROM golang:1.18-alpine
+FROM golang:1.18-alpine 
 
 # Install git.
 # Git is required for fetching the dependencies.
@@ -20,7 +20,7 @@ COPY . .
 RUN go build -o main .
 
 # This container exposes port 8080 to the outside world
-EXPOSE 8080
+EXPOSE 8000
 
 # Command to run the executable
 CMD ["./main"]

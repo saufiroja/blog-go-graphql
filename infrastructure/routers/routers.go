@@ -12,7 +12,7 @@ import (
 )
 
 func Routes(fiber *fiber.App, conf database.Config) *handler.Handler {
-	db := database.InitDatabase(conf)
+	db := database.InitDatabase(&conf)
 
 	// repositories
 	userRepository := repository.NewUserRepository(db)
