@@ -23,14 +23,7 @@ func InitServer() *fiber.App {
 
 	handler := routers.Routes(app, conf)
 
-	app.Get("/graphql", func(c *fiber.Ctx) error {
-		fasthttpadaptor.NewFastHTTPHandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			handler.ServeHTTP(w, r)
-		})(c.Context())
-		return nil
-	})
-
-	app.Post("/graphql", func(c *fiber.Ctx) error {
+	app.All("/graphql", func(c *fiber.Ctx) error {
 		fasthttpadaptor.NewFastHTTPHandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			handler.ServeHTTP(w, r)
 		})(c.Context())
