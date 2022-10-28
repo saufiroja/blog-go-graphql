@@ -10,22 +10,10 @@ type Token {
   accessToken: String!
 }
 
-type LoginResponse {
-  code: Int!
-  message: String!
-  result: Token!
-}
-
-type RegisterResponse {
-  code: Int!
-  message: String!
-  result: User!
-}
-
-type GetUsersResponse {
-  code: Int!
-  message: String!
-  result: [User!]!
+type Token {
+  accessToken: String!
+  refreshToken: String!
+  expiresIn: Int!
 }
 
 type Query {
@@ -34,8 +22,8 @@ type Query {
 }
 
 type Mutation {
-  Register(name: String!, email: String!, password: String!): RegisterResponse!
-  Login(email: String!, password: String!): LoginResponse!
+  Register(name: String!, email: String!, password: String!): User!
+  Login(email: String!, password: String!): Token!
   UpdateUser(id: String!, name: String!): User!
   DeleteUser(id: String!): User!
 }

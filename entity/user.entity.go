@@ -10,6 +10,7 @@ type User struct {
 	Name      string    `json:"name" gorm:"not null"`
 	Email     string    `json:"email" gorm:"unique" validate:"required,email,unique"`
 	Password  string    `json:"password" validate:"required,min=8,max=20"`
+	Role      string    `json:"role" gorm:"not null"`
 	Article   []Article `json:"article" gorm:"foreignKey:UserID"`
 	CreatedAt int64     `json:"created_at" gorm:"autoCreateTime:milli"`
 	UpdatedAt int64     `json:"updated_at" gorm:"autoUpdateTime:milli"`

@@ -30,18 +30,24 @@ func (s *UserService) Register(user *dto.Register) error {
 	return nil
 }
 
-func (s *UserService) Login(email, password string) (string, error) {
+func (s *UserService) Login(email, password string) (dto.Token, error) {
+	token := dto.Token{}
 	user, err := s.userRepository.Login(email)
 	if err != nil {
-		return "", errors.New("email is not registered")
+		return token, errors.New("email is not registered")
 	}
 
 	err = utils.ComparePassword(user.Password, password)
 	if err != nil {
-		return "", errors.New("password is incorrect")
+		return token, errors.New("password is incorrect")
 	}
 
-	token, _ := utils.GenerateAccessToken(user.ID, user.Email)
+	expiresin, accessToken, _ := utils.GenerateAccessToken(user.ID, user.Email, user.Role)
+	refreshToken, _ := utils.GenerateRefreshToken(user.ID, user.Email, user.Role)
+
+	token.AccessToken = accessToken
+	token.RefreshToken = refreshToken
+	token.ExpiresIn = int64(expiresin)
 
 	return token, nil
 }

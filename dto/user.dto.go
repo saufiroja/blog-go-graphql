@@ -14,3 +14,9 @@ type Login struct {
 type UpdateUser struct {
 	Name string `json:"name" gorm:"not null"`
 }
+
+type Token struct {
+	AccessToken  string `json:"accessToken"`
+	RefreshToken string `json:"refreshToken"`
+	ExpiresIn    int64  `json:"expiresIn"`
+}

@@ -41,7 +41,13 @@ func (r *UserResolvers) Login(params graphql.ResolveParams) (interface{}, error)
 		return nil, err
 	}
 
-	return token, nil
+	data := dto.Token{
+		AccessToken:  token.AccessToken,
+		RefreshToken: token.RefreshToken,
+		ExpiresIn:    token.ExpiresIn,
+	}
+
+	return data, nil
 }
 
 func (r *UserResolvers) FindAllUsers(params graphql.ResolveParams) (interface{}, error) {

@@ -24,6 +24,12 @@ var (
 			"accessToken": &graphql.Field{
 				Type: graphql.String,
 			},
+			"refreshToken": &graphql.Field{
+				Type: graphql.String,
+			},
+			"expiresIn": &graphql.Field{
+				Type: graphql.Int,
+			},
 		},
 	})
 
