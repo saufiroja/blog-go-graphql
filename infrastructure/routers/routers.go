@@ -32,9 +32,10 @@ func Routes(fiber *fiber.App, conf database.Config) *handler.Handler {
 
 	// graphql
 	gh := handler.New(&handler.Config{
-		Schema:   userSchema.Root(),
-		Pretty:   true,
-		GraphiQL: true,
+		Schema:     userSchema.Root(),
+		Pretty:     true,
+		GraphiQL:   true,
+		Playground: true,
 	})
 
 	return gh
