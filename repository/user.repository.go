@@ -23,6 +23,7 @@ func (r *userRepository) Register(user *dto.Register) error {
 		Name:     user.Name,
 		Email:    user.Email,
 		Password: user.Password,
+		Role:     user.Role,
 	}
 
 	result := r.DB.Model(&users).Create(&users)

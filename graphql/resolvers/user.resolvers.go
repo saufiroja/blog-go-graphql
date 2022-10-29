@@ -23,6 +23,7 @@ func (r *UserResolvers) Register(params graphql.ResolveParams) (interface{}, err
 		Name:     params.Args["name"].(string),
 		Email:    params.Args["email"].(string),
 		Password: params.Args["password"].(string),
+		Role:     params.Args["role"].(string),
 	}
 
 	err := r.UserService.Register(user)
@@ -34,9 +35,11 @@ func (r *UserResolvers) Register(params graphql.ResolveParams) (interface{}, err
 }
 
 func (r *UserResolvers) Login(params graphql.ResolveParams) (interface{}, error) {
-	email := params.Args["email"].(string)
-	password := params.Args["password"].(string)
-	token, err := r.UserService.Login(email, password)
+	user := &dto.Login{
+		Email:    params.Args["email"].(string),
+		Password: params.Args["password"].(string),
+	}
+	token, err := r.UserService.Login(user)
 	if err != nil {
 		return nil, err
 	}

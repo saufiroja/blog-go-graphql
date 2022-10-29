@@ -18,7 +18,7 @@ type UserRepository interface {
 
 type UserService interface {
 	Register(user *dto.Register) error
-	Login(email, password string) (dto.Token, error)
+	Login(login *dto.Login) (dto.Token, error)
 	FindAllUsers() ([]entity.User, error)
 	FindUserById(id string) (entity.User, error)
 	UpdateUser(id string, user *entity.User) error

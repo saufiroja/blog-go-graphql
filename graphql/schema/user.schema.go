@@ -49,6 +49,9 @@ var (
 			"password": &graphql.Field{
 				Type: graphql.String,
 			},
+			"role": &graphql.Field{
+				Type: graphql.String,
+			},
 			"created_at": &graphql.Field{
 				Type: graphql.Int,
 			},
@@ -104,6 +107,9 @@ func (s *UserSchema) Mutation() *graphql.Object {
 						Type: graphql.NewNonNull(graphql.String),
 					},
 					"password": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+					"role": &graphql.ArgumentConfig{
 						Type: graphql.NewNonNull(graphql.String),
 					},
 				},
