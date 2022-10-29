@@ -1,0 +1,25 @@
+type Article {
+  id: ID!
+  title: String!
+  body: String!
+  category: String!
+  userId: String!
+  createdAt: Int!
+  updatedAt: Int!
+  deletedAt: Int
+}
+
+type createArticle {
+  title: String!
+  body: String!
+  category: String!
+  userId: String!
+}
+
+type Query {
+  FindAllArticle: [Article]
+}
+
+type Mutation {
+  CreateArticle(input: createArticle): Article!
+}

@@ -16,19 +16,23 @@ func Routes(fiber *fiber.App, conf database.Config) *handler.Handler {
 
 	// repositories
 	userRepository := repository.NewUserRepository(db)
+	// articleRepository := repository.NewArticleRepository(db)
 
 	// services
 	userService := service.NewUserService(userRepository)
+	// articleService := service.NewArticleService(articleRepository, conf)
 
 	// resolvers
 	userResolvers := resolvers.NewUserResolvers(userService)
+	// articleResolvers := resolvers.NewArticleResolvers(articleService)
 
 	// schema
-	schema := schema.NewUserSchema(userResolvers)
+	userSchema := schema.NewUserSchema(userResolvers)
+	// articleSchema := schema.NewArticleSchema(articleResolvers)
 
 	// graphql
 	gh := handler.New(&handler.Config{
-		Schema:   schema.Root(),
+		Schema:   userSchema.Root(),
 		Pretty:   true,
 		GraphiQL: true,
 	})
