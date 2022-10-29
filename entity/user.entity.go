@@ -12,6 +12,9 @@ type User struct {
 	Password  string    `json:"password" validate:"required,min=8,max=20"`
 	Role      string    `json:"role" gorm:"not null"`
 	Article   []Article `json:"article" gorm:"foreignKey:UserID"`
+	Comment   []Comment `json:"comment" gorm:"foreignKey:UserID"`
+	Like      []Like    `json:"like" gorm:"foreignKey:UserID"`
+	Dislike   []Dislike `json:"dislike" gorm:"foreignKey:UserID"`
 	CreatedAt int64     `json:"created_at" gorm:"autoCreateTime:milli"`
 	UpdatedAt int64     `json:"updated_at" gorm:"autoUpdateTime:milli"`
 	DeletedAt int64     `json:"deleted_at" gorm:"index"`

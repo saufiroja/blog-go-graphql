@@ -11,11 +11,13 @@ type Article struct {
 	Title        string    `json:"title" gorm:"not null"`
 	Body         string    `json:"body" gorm:"not null"`
 	Category     string    `json:"category" gorm:"not null"`
-	Likes        int       `json:"likes" gorm:"not null,default:0"`
-	Dislikes     int       `json:"dislikes" gorm:"not null,default:0"`
 	UserID       string    `json:"user_id" gorm:"not null"`
-	Comments     []Comment `json:"comments" gorm:"foreignKey:ArticleID"`
 	TotalComment int       `json:"total_comment" gorm:"-"`
+	TotalLike    int       `json:"total_like" gorm:"-"`
+	TotalDislike int       `json:"total_dislike" gorm:"-"`
+	Comments     []Comment `json:"comments" gorm:"foreignKey:ArticleID"`
+	Likes        []Like    `json:"likes" gorm:"foreignKey:ArticleID"`
+	Dislikes     []Dislike `json:"dislikes" gorm:"foreignKey:ArticleID"`
 	CreatedAt    int64     `json:"created_at" gorm:"autoCreateTime:milli"`
 	UpdatedAt    int64     `json:"updated_at" gorm:"autoUpdateTime:milli"`
 	DeletedAt    int64     `json:"deleted_at" gorm:"index"`
