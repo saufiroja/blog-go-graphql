@@ -43,7 +43,7 @@ func InitDatabase(conf *Config) *gorm.DB {
 	if err != nil {
 		log.Panic(err)
 	}
-	db.AutoMigrate(&entity.User{}, &entity.Article{})
+	db.AutoMigrate(&entity.User{}, &entity.Article{}, &entity.Comment{})
 
 	return db
 }
