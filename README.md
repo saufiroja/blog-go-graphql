@@ -7,3 +7,7 @@
 - Postgres
 - GraphQL
 - Docker
+
+## Diagram Database
+
+![Alt text](public/diagram%20blog.png 'Diagram')
