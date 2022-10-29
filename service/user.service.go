@@ -2,7 +2,6 @@ package service
 
 import (
 	"errors"
-	"fmt"
 	"graphql/blog-go-graphql/dto"
 	"graphql/blog-go-graphql/entity"
 	"graphql/blog-go-graphql/interfaces"
@@ -37,8 +36,6 @@ func (s *UserService) Login(login *dto.Login) (dto.Token, error) {
 	if err != nil {
 		return token, errors.New("email is not registered")
 	}
-
-	fmt.Println(user.Role)
 
 	err = utils.ComparePassword(user.Password, login.Password)
 	if err != nil {
