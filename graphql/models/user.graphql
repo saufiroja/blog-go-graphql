@@ -9,10 +9,6 @@ type User {
 
 type Token {
   accessToken: String!
-}
-
-type Token {
-  accessToken: String!
   refreshToken: String!
   expiresIn: Int!
 }

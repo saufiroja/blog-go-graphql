@@ -16,92 +16,74 @@ func NewArticleSchema(articleResolvers interfaces.ArticleResolvers) interfaces.A
 	}
 }
 
-// variable for article schema
-var (
-	Article = graphql.NewObject(graphql.ObjectConfig{
-		Name:        "Article",
-		Description: "Article",
-		Fields: graphql.Fields{
-			"id": &graphql.Field{
-				Type: graphql.String,
-			},
-			"photoURL": &graphql.Field{
-				Type: graphql.String,
-			},
-			"title": &graphql.Field{
-				Type: graphql.String,
-			},
-			"body": &graphql.Field{
-				Type: graphql.String,
-			},
-			"category": &graphql.Field{
-				Type: graphql.String,
-			},
-			"userID": &graphql.Field{
-				Type: graphql.String,
-			},
-			"created_at": &graphql.Field{
-				Type: graphql.Int,
-			},
-			"updated_at": &graphql.Field{
-				Type: graphql.Int,
-			},
+var articleType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Article",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.String,
 		},
-	})
-)
-
-func (s *ArticleSchema) Query() *graphql.Object {
-	object := graphql.ObjectConfig{
-		Name: "Query",
-		Fields: graphql.Fields{
-			"articles": &graphql.Field{
-				Type:        graphql.NewList(Article),
-				Description: "Get all articles",
-				Resolve:     s.articleResolvers.FindAllArticles,
-			},
+		"photoURL": &graphql.Field{
+			Type: graphql.String,
 		},
-	}
+		"title": &graphql.Field{
+			Type: graphql.String,
+		},
+		"body": &graphql.Field{
+			Type: graphql.String,
+		},
+		"category": &graphql.Field{
+			Type: graphql.String,
+		},
+		"userId": &graphql.Field{
+			Type: graphql.String,
+		},
+		"createdAt": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"updatedAt": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"deletedAt": &graphql.Field{
+			Type: graphql.Int,
+		},
+	},
+})
 
-	return graphql.NewObject(object)
-}
-
-func (s *ArticleSchema) Mutation() *graphql.Object {
-	object := graphql.ObjectConfig{
-		Name: "Mutation",
-		Fields: graphql.Fields{
-			"createArticle": &graphql.Field{
-				Type:        Article,
-				Description: "Create new article",
-				Args: graphql.FieldConfigArgument{
-					"photoURL": &graphql.ArgumentConfig{
-						Type: graphql.NewNonNull(graphql.String),
-					},
-					"title": &graphql.ArgumentConfig{
-						Type: graphql.NewNonNull(graphql.String),
-					},
-					"body": &graphql.ArgumentConfig{
-						Type: graphql.NewNonNull(graphql.String),
-					},
-					"category": &graphql.ArgumentConfig{
-						Type: graphql.NewNonNull(graphql.String),
-					},
-					"userID": &graphql.ArgumentConfig{
-						Type: graphql.NewNonNull(graphql.String),
-					},
-				},
-				Resolve: s.articleResolvers.CreateArticle,
-			},
+func (s *ArticleSchema) CreateArticle() *graphql.Field {
+	args := graphql.FieldConfigArgument{
+		"photoURL": &graphql.ArgumentConfig{
+			Type: graphql.String,
+		},
+		"title": &graphql.ArgumentConfig{
+			Type: graphql.String,
+		},
+		"body": &graphql.ArgumentConfig{
+			Type: graphql.String,
+		},
+		"category": &graphql.ArgumentConfig{
+			Type: graphql.String,
+		},
+		"userId": &graphql.ArgumentConfig{
+			Type: graphql.String,
 		},
 	}
 
-	return graphql.NewObject(object)
+	field := graphql.Field{
+		Type:        articleType,
+		Description: "Create a new article",
+		Args:        args,
+		Resolve:     s.articleResolvers.CreateArticle,
+	}
+
+	return &field
 }
 
-func (s *ArticleSchema) Root() *graphql.Schema {
-	schema, _ := graphql.NewSchema(graphql.SchemaConfig{
-		Query:    s.Query(),
-		Mutation: s.Mutation(),
-	})
+func (s *ArticleSchema) FindAllArticles() *graphql.Field {
+	field := graphql.Field{
+		Type:        graphql.NewList(articleType),
+		Description: "Find all articles",
+		Resolve:     s.articleResolvers.FindAllArticles,
+	}
 
-	return &schema
+	return &field
 }

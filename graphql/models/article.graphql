@@ -9,17 +9,16 @@ type Article {
   deletedAt: Int
 }
 
-type createArticle {
-  title: String!
-  body: String!
-  category: String!
-  userId: String!
-}
-
 type Query {
   FindAllArticle: [Article]
 }
 
 type Mutation {
-  CreateArticle(input: createArticle): Article!
+  CreateArticle(
+    photoURL: String!
+    title: String!
+    body: String!
+    category: String!
+    userId: String!
+  ): Article!
 }

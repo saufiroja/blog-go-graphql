@@ -18,14 +18,12 @@ func NewArticleResolvers(articleService interfaces.ArticleService) interfaces.Ar
 }
 
 func (r *articleResolver) CreateArticle(params graphql.ResolveParams) (interface{}, error) {
-	article := params.Args["article"].(map[string]interface{})
-
 	articleInput := &dto.CreateArticle{
-		PhotoURL: article["photoURL"].(string),
-		Title:    article["title"].(string),
-		Body:     article["body"].(string),
-		Category: article["category"].(string),
-		UserID:   article["userID"].(string),
+		PhotoURL: params.Args["photoURL"].(string),
+		Title:    params.Args["title"].(string),
+		Body:     params.Args["body"].(string),
+		Category: params.Args["category"].(string),
+		UserID:   params.Args["userId"].(string),
 	}
 
 	err := r.articleService.CreateArticle(articleInput)

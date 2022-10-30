@@ -35,7 +35,10 @@ type UserResolvers interface {
 }
 
 type UserSchema interface {
-	Mutation() *graphql.Object
-	Query() *graphql.Object
-	Root() *graphql.Schema
+	Register() *graphql.Field
+	Login() *graphql.Field
+	FindAllUsers() *graphql.Field
+	FindUserById() *graphql.Field
+	UpdateUser() *graphql.Field
+	DeleteUser() *graphql.Field
 }

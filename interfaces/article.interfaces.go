@@ -23,7 +23,6 @@ type ArticleResolvers interface {
 }
 
 type ArticleSchema interface {
-	Mutation() *graphql.Object
-	Query() *graphql.Object
-	Root() *graphql.Schema
+	CreateArticle() *graphql.Field
+	FindAllArticles() *graphql.Field
 }
