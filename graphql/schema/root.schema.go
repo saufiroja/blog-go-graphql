@@ -45,6 +45,8 @@ func (r *rootSchema) Mutation() *graphql.Object {
 			"UpdateUser":    r.userSchema.UpdateUser(),
 			"DeleteUser":    r.userSchema.DeleteUser(),
 			"CreateArticle": r.articleSchema.CreateArticle(),
+			"UpdateArticle": r.articleSchema.UpdateArticle(),
+			"DeleteArticle": r.articleSchema.DeleteArticle(),
 		},
 	}
 

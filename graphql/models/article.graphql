@@ -22,4 +22,13 @@ type Mutation {
     category: String!
     userId: String!
   ): Article!
+  UpdateArticle(
+    id: String!
+    photoURL: String!
+    title: String!
+    body: String!
+    category: String!
+    userId: String!
+  ): Article!
+  DeleteArticle(id: String!): Article!
 }

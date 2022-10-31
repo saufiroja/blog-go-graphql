@@ -104,3 +104,52 @@ func (s *ArticleSchema) FindArticleByID() *graphql.Field {
 
 	return &field
 }
+
+func (s *ArticleSchema) UpdateArticle() *graphql.Field {
+	args := graphql.FieldConfigArgument{
+		"id": &graphql.ArgumentConfig{
+			Type: graphql.String,
+		},
+		"photoURL": &graphql.ArgumentConfig{
+			Type: graphql.String,
+		},
+		"title": &graphql.ArgumentConfig{
+			Type: graphql.String,
+		},
+		"body": &graphql.ArgumentConfig{
+			Type: graphql.String,
+		},
+		"category": &graphql.ArgumentConfig{
+			Type: graphql.String,
+		},
+		"userId": &graphql.ArgumentConfig{
+			Type: graphql.String,
+		},
+	}
+
+	field := graphql.Field{
+		Type:        articleType,
+		Description: "Update an article",
+		Args:        args,
+		Resolve:     s.articleResolvers.UpdateArticle,
+	}
+
+	return &field
+}
+
+func (s *ArticleSchema) DeleteArticle() *graphql.Field {
+	args := graphql.FieldConfigArgument{
+		"id": &graphql.ArgumentConfig{
+			Type: graphql.String,
+		},
+	}
+
+	field := graphql.Field{
+		Type:        articleType,
+		Description: "Delete an article",
+		Args:        args,
+		Resolve:     s.articleResolvers.DeleteArticle,
+	}
+
+	return &field
+}

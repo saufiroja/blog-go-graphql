@@ -56,3 +56,29 @@ func (r *articleRepository) FindArticleByID(id string) (entity.Article, error) {
 
 	return article, nil
 }
+
+func (r *articleRepository) UpdateArticle(id string, article *dto.UpdateArticle) error {
+	articleModel := entity.Article{
+		PhotoURL: article.PhotoURL,
+		Title:    article.Title,
+		Body:     article.Body,
+		Category: article.Category,
+		UserID:   article.UserID,
+	}
+
+	err := r.DB.Model(&articleModel).Where("id = ?", id).Updates(&articleModel).Error
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (r *articleRepository) DeleteArticle(id string) error {
+	err := r.DB.Where("id = ?", id).Delete(&entity.Article{}).Error
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

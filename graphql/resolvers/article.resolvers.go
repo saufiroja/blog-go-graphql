@@ -53,3 +53,32 @@ func (r *articleResolver) FindArticleByID(params graphql.ResolveParams) (interfa
 
 	return article, nil
 }
+
+func (r *articleResolver) UpdateArticle(params graphql.ResolveParams) (interface{}, error) {
+	id := params.Args["id"].(string)
+	articleInput := &dto.UpdateArticle{
+		PhotoURL: params.Args["photoURL"].(string),
+		Title:    params.Args["title"].(string),
+		Body:     params.Args["body"].(string),
+		Category: params.Args["category"].(string),
+		UserID:   params.Args["userId"].(string),
+	}
+
+	err := r.articleService.UpdateArticle(id, articleInput)
+	if err != nil {
+		return nil, err
+	}
+
+	return articleInput, nil
+}
+
+func (r *articleResolver) DeleteArticle(params graphql.ResolveParams) (interface{}, error) {
+	id := params.Args["id"].(string)
+
+	err := r.articleService.DeleteArticle(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return nil, nil
+}
