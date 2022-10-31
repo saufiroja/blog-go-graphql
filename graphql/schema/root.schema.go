@@ -31,6 +31,7 @@ func (s *rootSchema) Query() *graphql.Object {
 			"FindAllUsers":    s.userSchema.FindAllUsers(),
 			"FindUserById":    s.userSchema.FindUserById(),
 			"FindAllArticles": s.articleSchema.FindAllArticles(),
+			"FindArticleById": s.articleSchema.FindArticleByID(),
 		},
 	})
 }

@@ -42,3 +42,14 @@ func (r *articleResolver) FindAllArticles(params graphql.ResolveParams) (interfa
 
 	return articles, nil
 }
+
+func (r *articleResolver) FindArticleByID(params graphql.ResolveParams) (interface{}, error) {
+	id := params.Args["id"].(string)
+
+	article, err := r.articleService.FindArticleByID(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return article, nil
+}

@@ -31,3 +31,7 @@ func (s *ArticleService) CreateArticle(article *dto.CreateArticle) error {
 func (s *ArticleService) FindAllArticles() ([]entity.Article, error) {
 	return s.ArticleRepository.FindAllArticles()
 }
+
+func (s *ArticleService) FindArticleByID(id string) (entity.Article, error) {
+	return s.ArticleRepository.FindArticleByID(id)
+}

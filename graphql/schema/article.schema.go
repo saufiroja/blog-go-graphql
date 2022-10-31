@@ -87,3 +87,20 @@ func (s *ArticleSchema) FindAllArticles() *graphql.Field {
 
 	return &field
 }
+
+func (s *ArticleSchema) FindArticleByID() *graphql.Field {
+	args := graphql.FieldConfigArgument{
+		"id": &graphql.ArgumentConfig{
+			Type: graphql.String,
+		},
+	}
+
+	field := graphql.Field{
+		Type:        articleType,
+		Description: "Find article by ID",
+		Args:        args,
+		Resolve:     s.articleResolvers.FindArticleByID,
+	}
+
+	return &field
+}

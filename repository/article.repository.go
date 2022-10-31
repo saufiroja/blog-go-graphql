@@ -45,3 +45,14 @@ func (r *articleRepository) FindAllArticles() ([]entity.Article, error) {
 
 	return articles, nil
 }
+
+func (r *articleRepository) FindArticleByID(id string) (entity.Article, error) {
+	var article entity.Article
+
+	err := r.DB.Model(&article).Where("id = ?", id).Find(&article).Error
+	if err != nil {
+		return article, err
+	}
+
+	return article, nil
+}
